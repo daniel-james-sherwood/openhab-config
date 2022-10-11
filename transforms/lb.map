@@ -1,0 +1,5 @@
+OFF=OK
+ON=Low
+-=Unknown
+UNDEF=Unknown
+NULL=Unknown
