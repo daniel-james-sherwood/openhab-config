@@ -1,8 +1,11 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-token = "oh.token.7g2rMNXdxpxFrHVjDI3ZT4K0jxpGOD2z40DXlCRjTjCzdjJ5sv0TsMApPratYmkPLKbgwVnpwDP4oWcbE0DAQg"
+# Change these if rebuilding system
+# id = "4b5e171fc9:bbd9c65639"
+# token = "oh.token.ANTNlHCUfbMlVSM0Lwv8Ga6Fi4KTrB7W646wKNvTGVJtqzVfzd8USJKNu2VN5NZl8I8S2BAg9oGNFezmQ"
 
+# Off "Mon;4.5;Tue;4.5;Wen;4.5;Thu;4.5;Fri;4.5;Sat;4.5;Sun;4.5"
 dayProfiles = {
     "Default": "17,06-00,21,09-00,17,17-00,21,22-00,17",
     "DefaultWE": "17,06-00,21,22-00,17",
@@ -73,14 +76,14 @@ floors = [
     ] },
 ]
 
-string1 = '\n'.join(['Number\t{_rtag}_AT\t"Temperature{_posn}"\t<temperature>\t({rtag_AT}g{rtag}, g{rtag}_T, AT_{_rtag})\t["CurrentTemperature"]\t{{channel="maxcul:thermostat:08ec9c6e13:f3274121e1:{address}:actual_temp"}}',
-                     'Number\t{_rtag}_ST\t"Set{_posn}"\t<heating>\t({rtag_ST}, ST_{_rtag})\t["TargetTemperature"]\t{{channel="maxcul:thermostat:08ec9c6e13:f3274121e1:{address}:set_temp"}}',
+string1 = '\n'.join(['Number\t{_rtag}_AT\t"Temperature{_posn}"\t<temperature>\t({rtag_AT}g{rtag}, g{rtag}_T, AT_{_rtag})\t["CurrentTemperature"]\t{{channel="maxcul:thermostat:4b5e171fc9:bbd9c65639:{address}:actual_temp"}}',
+                     'Number\t{_rtag}_ST\t"Set{_posn}"\t<heating>\t({rtag_ST}, ST_{_rtag})\t["TargetTemperature"]\t{{channel="maxcul:thermostat:4b5e171fc9:bbd9c65639:{address}:set_temp"}}',
                      'Number\t{_rtag}_OT\t"Offset{_posn}"\t<heating>\t({rtag_OT}gOT, gOTE, OT_{_rtag})',
                      'String\t_{_rtag}_OT\t"Offset{_posn}"\t<heating>\t{{channel="http:url:maxculconfig:{address}_offsetTemp"}}',
-                     'Number\t{_rtag}_VP\t"Valve{_posn}"\t<pressure>\t(g{rtag}, g{rtag}_T, VP_{_rtag})\t{{channel="maxcul:thermostat:08ec9c6e13:f3274121e1:{address}:valve"}}',
-                     'Switch\t{_rtag}_LB\t"Battery{_posn} [MAP(lb.map):%s]"\t<lowbattery>\t(_g{rtag}, _g{rtag}_T, LB_{_rtag})\t{{channel="maxcul:thermostat:08ec9c6e13:f3274121e1:{address}:battery_low"}}',
-                     'String\t{_rtag}_MD\t"Mode{_posn}"\t<switch>\t({rtag_MD}MD_{_rtag})\t{{channel="maxcul:thermostat:08ec9c6e13:f3274121e1:{address}:mode"}}',
-#                     'String\t{_rtag}_EMD\t"Mode{_posn}"\t<switch>\t({rtag_MD}_g{rtag}, EMD_{_rtag})\t{{channel="maxcul:thermostat:08ec9c6e13:f3274121e1:{address}:extended_mode"}}',
+                     'Number\t{_rtag}_VP\t"Valve{_posn}"\t<pressure>\t(g{rtag}, g{rtag}_T, VP_{_rtag})\t{{channel="maxcul:thermostat:4b5e171fc9:bbd9c65639:{address}:valve"}}',
+                     'Switch\t{_rtag}_LB\t"Battery{_posn} [MAP(lb.map):%s]"\t<lowbattery>\t(_g{rtag}, _g{rtag}_T, LB_{_rtag})\t{{channel="maxcul:thermostat:4b5e171fc9:bbd9c65639:{address}:battery_low"}}',
+                     'String\t{_rtag}_MD\t"Mode{_posn}"\t<switch>\t({rtag_MD}MD_{_rtag})\t{{channel="maxcul:thermostat:4b5e171fc9:bbd9c65639:{address}:mode"}}',
+#                     'String\t{_rtag}_EMD\t"Mode{_posn}"\t<switch>\t({rtag_MD}_g{rtag}, EMD_{_rtag})\t{{channel="maxcul:thermostat:4b5e171fc9:bbd9c65639:{address}:extended_mode"}}',
 #                     'String\t{_rtag}_AMD\t"Alexa Mode{_posn}"\t<switch>\t({rtag_AMD}_g{rtag})\t["homekit:HeatingCoolingMode"]',
                      'String\t{_rtag}_WP\t"Program{_posn}"\t<switch>\t({rtag_WP}WP_{_rtag})\t{{channel="http:url:maxculconfig:{address}_weekProfile"}}',
                      '',
@@ -164,8 +167,8 @@ def write_alexa_rule(fh, tag):
 
 def write_config_things(fh, address):
     fh.write('\n'.join([
-        '\t\t\t\tType string : {address}_offsetTemp "{address}_offsetTemp" [ stateTransformation="JSONPATH:$.configuration.offsetTemp", stateExtension="maxcul:thermostat:08ec9c6e13:f3274121e1:{address}", commandExtension="maxcul:thermostat:08ec9c6e13:f3274121e1:{address}/config", commandTransformation="JS:thermostatOffset.js" ]',
-        '\t\t\t\tType string : {address}_weekProfile "{address}_weekProfile" [ stateTransformation="JSONPATH:$.configuration.weekProfile", stateExtension="maxcul:thermostat:08ec9c6e13:f3274121e1:{address}", commandExtension="maxcul:thermostat:08ec9c6e13:f3274121e1:{address}/config", commandTransformation="JS:weekProfile.js" ]',
+        '\t\t\t\tType string : {address}_offsetTemp "{address}_offsetTemp" [ stateTransformation="JSONPATH:$.configuration.offsetTemp", stateExtension="maxcul:thermostat:4b5e171fc9:bbd9c65639:{address}", commandExtension="maxcul:thermostat:4b5e171fc9:bbd9c65639:{address}/config", commandTransformation="JS:thermostatOffset.js" ]',
+        '\t\t\t\tType string : {address}_weekProfile "{address}_weekProfile" [ stateTransformation="JSONPATH:$.configuration.weekProfile", stateExtension="maxcul:thermostat:4b5e171fc9:bbd9c65639:{address}", commandExtension="maxcul:thermostat:4b5e171fc9:bbd9c65639:{address}/config", commandTransformation="JS:weekProfile.js" ]',
         ''
         ]).format(address=address))
 
@@ -211,7 +214,7 @@ th = open("/etc/openhab/things/thermostat.things", "w")
 th.write('\n'.join(['Thing http:url:maxculconfig "MAX! Bridge Config" [',
 	                '\tbaseURL="http://openhabianpi:8080/rest/things",',
                     '\tauthMode="BASIC_PREEMPTIVE",',
-                    '\tusername="oh.token.7g2rMNXdxpxFrHVjDI3ZT4K0jxpGOD2z40DXlCRjTjCzdjJ5sv0TsMApPratYmkPLKbgwVnpwDP4oWcbE0DAQg",',
+                    '\tusername="oh.token.ANTNlHCUfbMlVSM0Lwv8Ga6Fi4KTrB7W646wKNvTGVJtqzVfzd8USJKNu2VN5NZl8I8S2BAg9oGNFezmQ",',
                     '\tpassword="",',
                     '\tcommandMethod="PUT",',
                     '\tcontentType="application/json",',
@@ -453,9 +456,9 @@ fh.write('\n'.join(['\t\t}',
                     '\tFrame label="Server" {',
                     '\t\tText label="Memory" item=Systeminfo_UsedMemory',
                     '\t\tText label="Storage" item=Systeminfo_UsedStorage',
-                    '\t\tChart item=Systeminfo_Used period=h refresh=6000 visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]',
-                    '\t\tChart item=Systeminfo_Used period=D refresh=30000 visibility=[ChartPeriod==1]',
-                    '\t\tChart item=Systeminfo_Used period=W refresh=30000 visibility=[ChartPeriod==2]',
+                    '\t\tChart item=Systeminfo_UsedMemory period=h refresh=6000 visibility=[ChartPeriod==0, ChartPeriod=="Uninitialized"]',
+                    '\t\tChart item=Systeminfo_UsedMemory period=D refresh=30000 visibility=[ChartPeriod==1]',
+                    '\t\tChart item=Systeminfo_UsedMemory period=W refresh=30000 visibility=[ChartPeriod==2]',
                     '',
                     '\t\tSwitch item=ChartPeriod label="Chart Period" mappings=[0="Hour", 1="Day", 2="Week"]',
                     '\t}',
